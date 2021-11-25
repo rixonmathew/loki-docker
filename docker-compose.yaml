@@ -1,0 +1,36 @@
+version: "3"
+networks:
+  loki:
+services:
+  loki:
+    image: grafana/loki:2.4.1
+    volumes:
+      - /Users/rixonmathew/rixmbssd/apps/loki-docker/loki:/etc/loki
+    ports:
+      - "3100:3100"
+    restart: unless-stopped
+    command: -config.file=/etc/loki/loki-config.yaml
+    networks:
+      - loki
+  promtail:
+    image: grafana/promtail:2.4.1
+    volumes:
+      - /var/log:/var/log
+      - /Users/rixonmathew/rixmbssd/logs/app_logs:/app_logs
+      - /Users/rixonmathew/rixmbssd/apps/loki-docker/promtail:/etc/promtail
+    ports:
+      - "1514:1514" # this is only needed if you are going to send syslogs
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail-config.yaml
+    networks:
+      - loki
+  grafana:
+    image: grafana/grafana:latest
+    user: "1000"
+    volumes:
+    - /Users/rixonmathew/rixmbssd/apps/loki-docker/grafana:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      - loki
