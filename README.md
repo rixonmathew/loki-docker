@@ -2,6 +2,8 @@
 To setup loki with docker for ingesting logs
 From https://techno-tim.github.io/posts/grafana-loki/
 
+*** Below option does not work in windows ***
+
 Install the loki plugin 
 ```
 docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
