@@ -1,5 +1,6 @@
 # loki-docker
 To setup loki with docker for ingesting logs
+From https://techno-tim.github.io/posts/grafana-loki/
 
 Add the following block to docker configuration to get docker logs in loki
 
