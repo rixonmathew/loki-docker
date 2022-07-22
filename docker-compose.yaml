@@ -3,7 +3,7 @@ networks:
   loki:
 services:
   loki:
-    image: grafana/loki:2.4.1
+    image: grafana/loki:2.6.1
     volumes:
       - /home/rixon/grafana-loki/loki:/etc/loki
     ports:
@@ -13,7 +13,7 @@ services:
     networks:
       - loki
   promtail:
-    image: grafana/promtail:2.4.1
+    image: grafana/promtail:2.6.1
     volumes:
       - /var/log:/var/log
       - /mnt/d/app_logs:/app_logs
@@ -30,7 +30,7 @@ services:
     volumes:
     - /home/rixon/grafana-loki/grafana:/var/lib/grafana
     ports:
-      - "3000:3000"
+      - "3001:3000"
     restart: unless-stopped
     networks:
       - loki
